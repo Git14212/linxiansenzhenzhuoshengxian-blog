@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gitee Pages 部署指南 - 飞狐生鲜策划博客</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2, h3 {
+            color: #2E8B57;
+            border-bottom: 2px solid #FF7F50;
+            padding-bottom: 10px;
+        }
+        .step {
+            background-color: #f9f9f9;
+            border-left: 4px solid #4682B4;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .important {
+            background-color: #fff8e1;
+            border: 2px solid #ffd54f;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .screenshot {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fafafa;
+            margin: 15px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2E8B57;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #26734d;
+        }
+        .btn-gitee {
+            background-color: #c71d23;
+        }
+        .btn-gitee:hover {
+            background-color: #a0161a;
+        }
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+        }
+        .url-box {
+            background-color: #f0f8ff;
+            border: 1px solid #4682B4;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🥦 飞狐生鲜策划博客 - Gitee Pages 部署指南</h1>
+        
+        <div class="important">
+            <h3>🎯 部署状态</h3>
+            <p><strong>你的 Gitee 用户名：</strong> <code>ngnlmind</code></p>
+            <p><strong>你的博客网址将是：</strong></p>
+            <div class="url-box">
+                https://ngnlmind.gitee.io/fresh-planning-blog
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>📋 第一步：创建 Gitee 仓库</h2>
+        
+        <div class="step">
+            <h3>1. 登录 Gitee</h3>
+            <a href="https://gitee.com/login" class="btn btn-gitee">前往 Gitee 登录</a>
+        </div>
+        
+        <div class="step">
+            <h3>2. 创建新仓库</h3>
+            <p>点击这个链接直接创建仓库：</p>
+            <a href="https://gitee.com/projects/new" class="btn">创建新仓库</a>
+            
+            <p><strong>填写以下信息：</strong></p>
+            <ul>
+                <li><strong>仓库名称：</strong> <code>fresh-planning-blog</code></li>
+                <li><strong>仓库介绍：</strong> 生鲜策划博客 - 专业策划导师的个人博客</li>
+                <li><strong>路径：</strong> <code>fresh-planning-blog</code>（会自动填写）</li>
+                <li><strong>公开/私有：</strong> 选择 <strong>公开</strong></li>
+                <li><strong>初始化仓库：</strong> <strong>不要勾选</strong> "使用 Readme 文件初始化这个仓库"</li>
+                <li><strong>其他选项：</strong> 保持默认即可</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>3. 获取仓库地址</h3>
+            <p>创建成功后，请告诉我以下信息：</p>
+            <ul>
+                <li><strong>完整的仓库地址：</strong> 类似 <code>https://gitee.com/ngnlmind/fresh-planning-blog</code></li>
+                <li><strong>你的仓库页面截图</strong>（如果需要进一步指导）</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>🚀 第二步：我会帮你上传文件</h2>
+        
+        <p>当你告诉我仓库地址后，我会：</p>
+        <ol>
+            <li>使用 Git 将所有博客文件推送到你的仓库</li>
+            <li>确保所有文件正确上传</li>
+            <li>创建一个初始的提交记录</li>
+        </ol>
+        
+        <div class="important">
+            <p><strong>注意：</strong> 如果你希望自己上传文件，也可以直接：</p>
+            <ol>
+                <li>在仓库页面点击 "上传文件"</li>
+                <li>将 <code>C:\Users\14212\生鲜策划博客\</code> 下的所有文件拖拽上传</li>
+                <li>填写提交信息："Initial commit - 飞狐生鲜策划博客"</li>
+                <li>点击提交</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>⚙️ 第三步：开启 Gitee Pages</h2>
+        
+        <div class="step">
+            <h3>1. 进入仓库设置</h3>
+            <p>在仓库页面，点击顶部菜单的 <strong>服务</strong> → <strong>Gitee Pages</strong></p>
+        </div>
+        
+        <div class="step">
+            <h3>2. 配置 Pages 设置</h3>
+            <p><strong>按以下配置：</strong></p>
+            <ul>
+                <li><strong>部署分支：</strong> master（或 main）</li>
+                <li><strong>部署目录：</strong> /（根目录）</li>
+                <li><strong>强制使用 HTTPS：</strong> 勾选</li>
+                <li><strong>其他选项：</strong> 保持默认</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>3. 开启 Pages</h3>
+            <p>点击 <strong>启动</strong> 按钮</p>
+            <p>等待 1-2 分钟，Gitee 会自动构建和部署</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>✅ 第四步：访问你的博客</h2>
+        
+        <div class="step">
+            <h3>博客网址</h3>
+            <p>部署成功后，访问：</p>
+            <div class="url-box">
+                https://ngnlmind.gitee.io/fresh-planning-blog
+            </div>
+            
+            <p><strong>备用地址：</strong></p>
+            <p>https://ngnlmind.gitee.io/fresh-planning-blog/index.html</p>
+        </div>
+        
+        <div class="step">
+            <h3>验证访问</h3>
+            <p>打开网址后，你应该能看到：</p>
+            <ul>
+                <li>博客首页，有 "🥦 飞狐生鲜策划" 标题</li>
+                <li>绿色的森林绿配色方案</li>
+                <li>顶部导航栏，有 6 个页面的链接</li>
+                <li>所有页面都可以正常点击访问</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>🔧 第五步：内容更新和维护</h2>
+        
+        <div class="step">
+            <h3>更新博客内容</h3>
+            <p>有几种方式更新你的博客：</p>
+            <ol>
+                <li><strong>通过 Gitee 网页上传</strong>：直接在仓库页面拖拽上传新文件</li>
+                <li><strong>通过 Git 命令</strong>：本地修改后推送到仓库</li>
+                <li><strong>告诉我帮你更新</strong>：我会指导你或直接帮你更新</li>
+            </ol>
+        </div>
+        
+        <div class="step">
+            <h3>重新部署</h3>
+            <p>每次上传新内容后，都需要：</p>
+            <ul>
+                <li>重新进入 <strong>服务 → Gitee Pages</strong></li>
+                <li>点击 <strong>更新</strong> 按钮</li>
+                <li>等待 Gitee 重新构建部署</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>📞 技术支持</h2>
+        
+        <div class="step">
+            <h3>常见问题</h3>
+            <p><strong>1. 页面显示404？</strong></p>
+            <p>检查 Gitee Pages 是否已经启动，并且部署目录是否正确。</p>
+            
+            <p><strong>2. 样式加载不出来？</strong></p>
+            <p>检查 CSS 文件是否上传成功，路径是否正确。</p>
+            
+            <p><strong>3. 图片不显示？</strong></p>
+            <p>检查图片路径，确保使用相对路径而不是绝对路径。</p>
+        </div>
+        
+        <div class="step">
+            <h3>联系支持</h3>
+            <p>如果遇到任何问题：</p>
+            <ul>
+                <li>告诉我具体的问题现象</li>
+                <li>提供错误页面的截图</li>
+                <li>提供 Gitee 仓库地址</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>🎯 立即行动</h2>
+        
+        <div class="important">
+            <p><strong>请立即完成：</strong></p>
+            <ol>
+                <li>登录 Gitee（使用账号 ngnlmind）</li>
+                <li>创建名为 <code>fresh-planning-blog</code> 的仓库</li>
+                <li>告诉我完整的仓库地址</li>
+            </ol>
+        </div>
+        
+        <p>准备好后，我会立即帮你上传文件和开启 Pages！</p>
+        
+        <a href="https://gitee.com/login" class="btn btn-gitee">前往 Gitee 登录</a>
+        <a href="https://gitee.com/projects/new" class="btn">创建新仓库</a>
+    </div>
+
+    <script>
+        // 自动生成仓库地址
+        const username = 'ngnlmind';
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlBoxes = document.querySelectorAll('.url-box');
+            urlBoxes.forEach(box => {
+                if (box.textContent.includes('ngnlmind.gitee.io')) {
+                    box.innerHTML = `
+                        <a href="https://${username}.gitee.io/fresh-planning-blog" 
+                           target="_blank" style="color: #2E8B57;">
+                            https://${username}.gitee.io/fresh-planning-blog
+                        </a>
+                    `;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
