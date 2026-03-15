@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 - 飞狐生鲜策划博客</title>
+    <style>
+        /* 继承基础样式 */
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #FF7F50;
+            --accent-color: #4682B4;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 关于我样式 */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 简介区域 */
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .intro-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        .avatar {
+            text-align: center;
+        }
+        
+        .avatar-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            margin: 0 auto;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .avatar-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        .avatar-title {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+        
+        .intro-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .intro-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* 经历时间线 */
+        .timeline-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+        
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .timeline-content.left {
+            left: 0;
+        }
+        
+        .timeline-content.right {
+            left: 55%;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 1.5rem;
+            width: 60px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-content.left .timeline-year {
+            right: -80px;
+        }
+        
+        .timeline-content.right .timeline-year {
+            left: -80px;
+        }
+        
+        .timeline-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 50px);
+                left: 50px !important;
+            }
+            
+            .timeline-content.left .timeline-year,
+            .timeline-content.right .timeline-year {
+                left: -45px;
+                right: auto;
+            }
+        }
+        
+        /* 专长卡片 */
+        .expertise-section {
+            margin-bottom: 4rem;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .expertise-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .expertise-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .expertise-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        /* 联系方式 */
+        .contact-section {
+            background: linear-gradient(135deg, var(--light-color), #e8f5e9);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 4rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            min-width: 50px;
+        }
+        
+        .contact-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        /* 工具类 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #26734d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e56b37;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">🥦 飞狐生鲜策划</div>
+            <div class="tagline">10年实战经验 · 专业策划导师 · 每日学习成长</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo" style="color: var(--primary-color); font-size: 1.5rem;">🥦 飞狐策划</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">策划心得</a></li>
+                <li><a href="cases.html">案例展示</a></li>
+                <li><a href="collection.html">方案收藏</a></li>
+                <li><a href="resources.html">资源下载</a></li>
+                <li><a href="about.html" class="active">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <div class="page-header">
+            <h1>🥦 关于飞狐</h1>
+            <p class="page-description">10年+生鲜策划经验 · 专注实战 · 热爱分享 · 帮助更多人做好生鲜</p>
+        </div>
+        
+        <!-- 个人简介 -->
+        <div class="intro-section">
+            <div class="avatar">
+                <div class="avatar-img">🦊</div>
+                <div class="avatar-name">飞狐</div>
+                <div class="avatar-title">生鲜策划导师</div>
+            </div>
+            
+            <div class="intro-content">
+                <h2>你好，我是飞狐！</h2>
+                <p>一个在生鲜行业摸爬滚打超过<span class="highlight">10年</span>的策划人。</p>
+                <p>我的故事很简单：大学毕业后进入生鲜行业，从基层采购做起，逐渐接触到门店运营、商品管理、营销策划等各个领域。见过凌晨三点的批发市场，也策划过单日百万销售额的爆款活动。</p>
+                <p>在这10年里，我服务过<span class="highlight">大型连锁超市</span>、<span class="highlight">社区生鲜店</span>、<span class="highlight">线上生鲜平台</span>等不同类型的客户，亲身经历了从传统零售到互联网生鲜的完整转型过程。</p>
+                <p>我见证了太多优秀的人才因为缺乏系统的策划思维和方法论，在生鲜这个看似简单、实则复杂的行业里反复碰壁。也看到了很多生鲜创业者因为错误的策划决策而损失惨重。</p>
+                <p>所以，我创建了这个博客。希望能把自己<span class="highlight">10多年的实战经验</span>、<span class="highlight">失败的教训</span>和<span class="highlight">成功的方法</span>分享给更多人。</p>
+                <p>我相信，生鲜策划不仅仅是技巧，更是一套完整的思维体系。从损耗控制到定价策略，从社群运营到抖音爆款，每一个环节都需要精准的策划和执行。</p>
+                <p>我的目标是：<span class="highlight">让每个人都能学会生鲜策划，让每个生鲜从业者都能少走弯路</span>。</p>
+                <p>如果你也热爱生鲜行业，欢迎与我同行，一起探索这个充满挑战与机遇的领域！</p>
+            </div>
+        </div>
+        
+        <!-- 职业经历 -->
+        <div class="timeline-section">
+            <h2 class="section-title">📅 职业经历</h2>
+            <div class="timeline">
+                <!-- 经历1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content left">
+                        <div class="timeline-year">2015-2017</div>
+                        <h3 class="timeline-title">生鲜采购专员</h3>
+                        <p>从批发市场到供应链，深入一线了解生鲜商品从产地到餐桌的完整流程，建立对生鲜特性的深刻理解。</p>
+                        <p>主要负责：商品采购、品质把控、供应商管理。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content right">
+                        <div class="timeline-year">2017-2019</div>
+                        <h3 class="timeline-title">门店运营经理</h3>
+                        <p>管理3家社区生鲜店，直面消费者需求，负责门店日常运营、商品陈列、损耗控制等工作。</p>
+                        <p>成功将其中一家门店的月损耗率从5%降至2.3%。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content left">
+                        <div class="timeline-year">2019-2021</div>
+                        <h3 class="timeline-title">电商策划主管</h3>
+                        <p>加入线上生鲜平台，负责从0到1搭建社区团购业务，主导设计了多个爆款活动。</p>
+                        <p>其中"9.9元水果盲盒"活动单日销售额突破50万元。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历4 -->
+                <div class="timeline-item">
+                    <div class="timeline-content right">
+                        <div class="timeline-year">2021-2023</div>
+                        <h3 class="timeline-title">独立策划顾问</h3>
+                        <p>独立为多家生鲜企业提供策划咨询服务，涵盖战略规划、营销活动、新媒体运营等多个维度。</p>
+                        <p>累计服务客户超过20家，帮助客户平均提升业绩30%以上。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历5 -->
+                <div class="timeline-item">
+                    <div class="timeline-content left">
+                        <div class="timeline-year">2023至今</div>
+                        <h3 class="timeline-title">生鲜策划导师</h3>
+                        <p>创办"飞狐生鲜策划"品牌，专注于生鲜策划知识分享和人才培养。</p>
+                        <p>通过博客、社群、培训等方式，帮助更多人生鲜从业者掌握策划思维和方法。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 专长领域 -->
+        <div class="expertise-section">
+            <h2 class="section-title">🎯 专长领域</h2>
+            <div class="expertise-grid mb-3">
+                <div class="expertise-card">
+                    <div class="expertise-icon">💰</div>
+                    <h3 class="expertise-title">定价策略</h3>
+                    <p>生鲜定价模型设计、动态定价策略、促销活动定价优化</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">📉</div>
+                    <h3 class="expertise-title">损耗控制</h3>
+                    <p>全流程损耗管理、精准订货系统、损耗分析与改善方案</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">📱</div>
+                    <h3 class="expertise-title">新媒体策划</h3>
+                    <p>抖音/小红书生鲜内容策划、社群运营、私域流量转化</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">🎨</div>
+                    <h3 class="expertise-title">活动策划</h3>
+                    <p>生鲜主题活动设计、爆款活动策划、季节性营销方案</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="contact-section">
+            <h2 class="section-title" style="color: var(--primary-color);">💬 联系与合作</h2>
+            <p class="text-center mb-2">如果你对生鲜策划有任何问题，或者有合作想法，欢迎随时联系我！</p>
+            
+            
+<div class="contact-grid">
+    <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-content">
+            <h4>电话 / 微信同号</h4>
+            <a href="tel:13419544138" style="font-size:1.1rem;font-weight:700;color:inherit;text-decoration:none;">13419544138</a>
+            <p>点击即可拨打</p>
+        </div>
+    </div>
+    <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div class="contact-content">
+            <h4>微信扫码添加</h4>
+            <img src="wx.jpg" alt="微信二维码" style="width:120px;height:120px;object-fit:contain;margin-top:8px;border-radius:6px;"/>
+            <p>长按图片识别二维码</p>
+        </div>
+    </div>
+    <div class="contact-item">
+        <div class="contact-icon">🎯</div>
+        <div class="contact-content">
+            <h4>策划咨询</h4>
+            <p>提供一对一策划咨询服务</p>
+            <p>包含诊断、方案设计、执行指导</p>
+        </div>
+    </div>
+    <div class="contact-item">
+        <div class="contact-icon">🎓</div>
+        <div class="contact-content">
+            <h4>培训合作</h4>
+            <p>企业内训、公开课</p>
+            <p>定制化生鲜策划培训方案</p>
+        </div>
+    </div>
+</div>
+<div class="text-center mt-3">
+    <a href="tel:13419544138" class="btn">立即电话咨询</a>
+</div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>我的承诺</h3>
+                    <p>分享真实、实用的生鲜策划经验，不贩卖焦虑，不夸大效果。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>学习理念</h3>
+                    <p>理论结合实践，方法结合案例，让每个人都能掌握生鲜策划。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>价值观</h3>
+                    <p>真诚分享 · 深度思考 · 持续学习 · 共同成长</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 飞狐生鲜策划博客 · 记录与分享每一天的思考与收获</p>
+                <p>🥦 用心做好每一个策划，用心服务每一个读者</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏活动状态
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 时间线动画
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+            
+            // 专长卡片动画
+            const expertiseCards = document.querySelectorAll('.expertise-card');
+            
+            expertiseCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 300 + index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
