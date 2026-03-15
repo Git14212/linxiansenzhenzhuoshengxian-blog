@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例展示 - 飞狐生鲜策划博客</title>
+    <style>
+        /* 继承基础样式 */
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #FF7F50;
+            --accent-color: #4682B4;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 案例展示样式 */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 案例分类 */
+        .case-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 案例网格 */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .case-image {
+            height: 200px;
+            background: linear-gradient(135deg, #3CB371, #2E8B57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .case-content {
+            padding: 1.5rem;
+        }
+        
+        .case-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: #F0F8FF;
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .case-title:hover {
+            color: var(--accent-color);
+        }
+        
+        .case-excerpt {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .case-stats {
+            display: flex;
+            gap: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .case-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background-color: #F5F5F5;
+            color: #666;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        /* 精选案例 */
+        .featured-case {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .featured-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+        }
+        
+        .featured-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .featured-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #F9F9F9;
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 工具类 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #26734d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e56b37;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">🥦 飞狐生鲜策划</div>
+            <div class="tagline">10年实战经验 · 专业策划导师 · 每日学习成长</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo" style="color: var(--primary-color); font-size: 1.5rem;">🥦 飞狐策划</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">策划心得</a></li>
+                <li><a href="cases.html" class="active">案例展示</a></li>
+                <li><a href="collection.html">方案收藏</a></li>
+                <li><a href="resources.html">资源下载</a></li>
+                <li><a href="about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <div class="page-header">
+            <h1>🏆 案例展示</h1>
+            <p class="page-description">这里展示了我收集和分析的优秀生鲜策划案例，涵盖超市、水果店、供应链等多个领域。每个案例都有深度分析和可复用的策略。</p>
+        </div>
+        
+        <!-- 案例分类 -->
+        <div class="case-categories">
+            <button class="category-btn active">全部案例</button>
+            <button class="category-btn">生鲜超市</button>
+            <button class="category-btn">水果店</button>
+            <button class="category-btn">供应链</button>
+            <button class="category-btn">抖音策划</button>
+            <button class="category-btn">社群运营</button>
+            <button class="category-btn">活动策划</button>
+        </div>
+        
+        <!-- 精选案例 -->
+        <div class="featured-case">
+            <div class="featured-header">
+                <div class="featured-badge">🏆 本周精选案例</div>
+                <h2 class="featured-title">@西安超市策划毛文：地域专家型策划人的成功路径</h2>
+                <p>分析西安本地超市策划专家的成功策略，学习如何打造地域专家人设</p>
+            </div>
+            <div class="featured-content">
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">案例概述</h3>
+                    <p>@西安超市策划毛文通过精准的地域定位和专业的策划内容，在抖音上建立了强大的专家形象。他的视频主要针对西安本地超市老板，提供具体的经营策划方案。</p>
+                    
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 1rem;">成功要素</h3>
+                    <ul style="padding-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>地域定位清晰</strong>：专注西安本地市场</li>
+                        <li><strong>内容聚焦</strong>：超市策划一个领域做深做透</li>
+                        <li><strong>具体解决方案</strong>：提供可执行的策划方案</li>
+                        <li><strong>信任建立</strong>：通过实际案例建立专业形象</li>
+                        <li><strong>互动设计</strong>：巧妙的问题设计和评论回复</li>
+                    </ul>
+                    
+                    <a href="case1-detail.html" class="btn" style="margin-top: 1.5rem;">查看完整案例分析 →</a>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">关键数据</h3>
+                    <div class="featured-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">3158</div>
+                            <div class="stat-label">最高点赞视频</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">内容相关性</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">策划方案数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2000+</div>
+                            <div class="stat-label">粉丝转化率</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 1rem;">适用场景</h3>
+                    <div class="case-tags">
+                        <span class="case-tag">#地域专家</span>
+                        <span class="case-tag">#超市策划</span>
+                        <span class="case-tag">#抖音运营</span>
+                        <span class="case-tag">#个人IP</span>
+                        <span class="case-tag">#内容定位</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 案例网格 -->
+        <div class="cases-grid">
+            <!-- 案例1 -->
+            <div class="case-card">
+                <div class="case-image">🛒</div>
+                <div class="case-content">
+                    <span class="case-type">生鲜超市</span>
+                    <a href="case2-detail.html" class="case-title">"9.9元水果盲盒"：社群拉新2000人的活动设计</a>
+                    <p class="case-excerpt">深度拆解一个成功的生鲜社群活动，学习如何通过"9.9元水果盲盒"活动在单场活动中拉新2000+人社群。</p>
+                    <div class="case-stats">
+                        <span>📊 成功率：92%</span>
+                        <span>⏱️ 阅读：12分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">社群运营</span>
+                        <span class="case-tag">活动策划</span>
+                        <span class="case-tag">私域流量</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例2 -->
+            <div class="case-card">
+                <div class="case-image">💰</div>
+                <div class="case-content">
+                    <span class="case-type">定价策略</span>
+                    <a href="case3-detail.html" class="case-title">生鲜定价公式：如何科学定价提升30%利润</a>
+                    <p class="case-excerpt">学习生鲜定价的核心公式：销售价 = 成本价 ÷ (1 - 目标毛利率)，分析不同商品的定价策略。</p>
+                    <div class="case-stats">
+                        <span>📊 利润提升：30%</span>
+                        <span>⏱️ 阅读：8分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">定价策略</span>
+                        <span class="case-tag">利润管理</span>
+                        <span class="case-tag">成本控制</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例3 -->
+            <div class="case-card">
+                <div class="case-image">📉</div>
+                <div class="case-content">
+                    <span class="case-type">损耗控制</span>
+                    <a href="case4-detail.html" class="case-title">"黄金时间法则"：降低50%生鲜损耗的系统方法</a>
+                    <p class="case-excerpt">拆解@生鲜祥哥的"黄金时间法则"，学习三个关键时间点的控制方法，大幅降低生鲜损耗。</p>
+                    <div class="case-stats">
+                        <span>📊 损耗降低：50%</span>
+                        <span>⏱️ 阅读：10分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">损耗控制</span>
+                        <span class="case-tag">时间管理</span>
+                        <span class="case-tag">保鲜技术</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例4 -->
+            <div class="case-card">
+                <div class="case-image">🎯</div>
+                <div class="case-content">
+                    <span class="case-type">抖音策划</span>
+                    <a href="case5-detail.html" class="case-title">不开抖音等于守着金矿不挖矿：传统生鲜店转型</a>
+                    <p class="case-excerpt">分析传统生鲜店如何通过抖音营销实现转型，学习抖音内容策划和流量获取方法。</p>
+                    <div class="case-stats">
+                        <span>📊 流量增长：300%</span>
+                        <span>⏱️ 阅读：15分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">抖音营销</span>
+                        <span class="case-tag">数字化转型</span>
+                        <span class="case-tag">内容策划</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例5 -->
+            <div class="case-card">
+                <div class="case-image">🏪</div>
+                <div class="case-content">
+                    <span class="case-type">超市运营</span>
+                    <a href="case6-detail.html" class="case-title">生鲜超市红包模式：提升回头客率的创新策略</a>
+                    <p class="case-excerpt">学习@段公子的红包模式，通过创新的促销方式提升顾客回头率，建立稳定的顾客群体。</p>
+                    <div class="case-stats">
+                        <span>📊 回头客率：+45%</span>
+                        <span>⏱️ 阅读：7分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">促销策略</span>
+                        <span class="case-tag">顾客忠诚度</span>
+                        <span class="case-tag">创新模式</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 案例6 -->
+            <div class="case-card">
+                <div class="case-image">📱</div>
+                <div class="case-content">
+                    <span class="case-type">私域运营</span>
+                    <a href="case7-detail.html" class="case-title">生鲜店私域建设：从0到1建立2000人社群</a>
+                    <p class="case-excerpt">系统学习生鲜店私域建设的四个步骤，从引流到运营，建立稳定的私域流量池。</p>
+                    <div class="case-stats">
+                        <span>📊 社群规模：2000+</span>
+                        <span>⏱️ 阅读：20分钟</span>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">私域流量</span>
+                        <span class="case-tag">社群运营</span>
+                        <span class="case-tag">用户留存</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 查看更多 -->
+        <div class="text-center">
+            <a href="#" class="btn btn-secondary">查看更多案例 →</a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于博客</h3>
+                    <p>这里是飞狐（10年生鲜策划导师）的个人博客，记录策划心得、展示案例、收藏最新方案，与所有生鲜从业者共同成长。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="index.html" style="color: #AAA;">首页</a></li>
+                        <li><a href="blog.html" style="color: #AAA;">策划心得</a></li>
+                        <li><a href="cases.html" style="color: #AAA;">案例展示</a></li>
+                        <li><a href="collection.html" style="color: #AAA;">方案收藏</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>联系飞狐</h3>
+                    <p>如果你有生鲜策划方面的问题，或者想要交流学习心得，欢迎联系我。</p>
+                    <a href="tel:13419544138" style="display:block;font-weight:700;font-size:1rem;color:inherit;text-decoration:none;margin:6px 0;">📱 13419544138</a>
+                    <img src="wx.jpg" alt="微信二维码" style="width:100px;height:100px;object-fit:contain;margin-top:6px;border-radius:4px;"/><br/>
+                    <small>长按图片识别微信二维码</small>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 飞狐生鲜策划博客 · 所有内容均为原创或授权转载 · 持续更新中</p>
+                <p>🥦 每天进步一点点，成为更好的生鲜策划人</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏活动状态
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 案例分类切换
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 这里可以添加筛选逻辑
+                    console.log('切换分类：' + this.textContent);
+                });
+            });
+            
+            // 案例卡片点击效果
+            const caseCards = document.querySelectorAll('.case-card');
+            caseCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A') {
+                        const link = this.querySelector('.case-title');
+                        if (link) {
+                            window.location.href = link.href;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
