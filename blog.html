@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策划心得 - 飞狐生鲜策划博客</title>
+    <style>
+        /* 继承首页样式 */
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #FF7F50;
+            --accent-color: #4682B4;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 博客内容样式 */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 博客文章列表 */
+        .blog-list {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .blog-post {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .post-header {
+            padding: 2rem;
+            border-bottom: 1px solid #EEE;
+        }
+        
+        .post-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .post-title:hover {
+            color: var(--accent-color);
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .post-content {
+            padding: 2rem;
+        }
+        
+        .post-excerpt {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            background-color: #26734d;
+        }
+        
+        /* 标签 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: #F0F8FF;
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .tag:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            padding: 0.5rem 1rem;
+            background-color: white;
+            border: 1px solid #DDD;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+        
+        .page-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .page-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+        }
+        
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #EEE;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        /* 工具类 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #26734d;
+            transform: translateY(-2px);
+        }
+        
+        .grid-2-1 {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 992px) {
+            .grid-2-1 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">🥦 飞狐生鲜策划</div>
+            <div class="tagline">10年实战经验 · 专业策划导师 · 每日学习成长</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo" style="color: var(--primary-color); font-size: 1.5rem;">🥦 飞狐策划</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html" class="active">策划心得</a></li>
+                <li><a href="cases.html">案例展示</a></li>
+                <li><a href="collection.html">方案收藏</a></li>
+                <li><a href="resources.html">资源下载</a></li>
+                <li><a href="about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <div class="page-header">
+            <h1>📝 策划心得</h1>
+            <p class="page-description">这里记录了我每日学习抖音生鲜策划视频的收获，深度拆解优秀文案和策略，建立个人知识体系。每篇文章都是实战经验的积累。</p>
+        </div>
+        
+        <div class="grid-2-1">
+            <!-- 博客文章列表 -->
+            <div class="blog-list">
+                <!-- 文章1 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <div class="post-date">📅 2026年3月12日 · 阅读时间：8分钟</div>
+                        <a href="article1.html" class="post-title">抖音生鲜策划Top 10视频分析：第一天学习收获</a>
+                        <div class="post-meta">
+                            <span>👁️ 阅读：1,235</span>
+                            <span>💬 评论：24</span>
+                            <span>👍 点赞：89</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">首次系统分析抖音生鲜策划视频，发现了损耗控制、定价策略、营销引流三大热门主题。分析了10个高赞视频的文案结构和策划策略，总结了痛点精准打击、具体解决方案、概念打造等核心规律...</p>
+                        <div class="tags">
+                            <a href="#" class="tag">#生鲜策划</a>
+                            <a href="#" class="tag">#抖音分析</a>
+                            <a href="#" class="tag">#学习系统</a>
+                            <a href="#" class="tag">#文案拆解</a>
+                        </div>
+                        <a href="article1.html" class="read-more" style="margin-top: 1rem; display: inline-block;">阅读全文 →</a>
+                    </div>
+                </article>
+                
+                <!-- 文章2 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <div class="post-date">📅 2026年3月11日 · 阅读时间：6分钟</div>
+                        <a href="article2.html" class="post-title">生鲜超市"黄金时间法则"：如何降低50%损耗</a>
+                        <div class="post-meta">
+                            <span>👁️ 阅读：2,458</span>
+                            <span>💬 评论：36</span>
+                            <span>👍 点赞：156</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">拆解@生鲜祥哥的高赞视频，学习如何打造易于传播的策划概念。分析"黄金时间法则"的三个关键时间点：采摘后3小时、到店后2小时、上架后1小时。学习如何用具体案例增加可信度，如何设计检查式互动...</p>
+                        <div class="tags">
+                            <a href="#" class="tag">#损耗控制</a>
+                            <a href="#" class="tag">#黄金时间法则</a>
+                            <a href="#" class="tag">#案例拆解</a>
+                            <a href="#" class="tag">#互动设计</a>
+                        </div>
+                        <a href="article2.html" class="read-more" style="margin-top: 1rem; display: inline-block;">阅读全文 →</a>
+                    </div>
+                </article>
+                
+                <!-- 文章3 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <div class="post-date">📅 2026年3月10日 · 阅读时间：10分钟</div>
+                        <a href="article3.html" class="post-title">从地域专家到模式创新者：抖音生鲜策划创作者类型分析</a>
+                        <div class="post-meta">
+                            <span>👁️ 阅读：1,892</span>
+                            <span>💬 评论：42</span>
+                            <span>👍 点赞：124</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">分析不同类型的生鲜策划创作者，了解他们各自的人设打造和内容策略。包括地域专家型（@西安超市策划毛文）、专业顾问型（@二马鲜生）、实战老板型（@兴万家生鲜超市）、模式创新者（@段公子）等类型。分析每种类型的优势和内容策略...</p>
+                        <div class="tags">
+                            <a href="#" class="tag">#创作者分析</a>
+                            <a href="#" class="tag">#人设打造</a>
+                            <a href="#" class="tag">#内容策略</a>
+                            <a href="#" class="tag">#抖音策划</a>
+                        </div>
+                        <a href="article3.html" class="read-more" style="margin-top: 1rem; display: inline-block;">阅读全文 →</a>
+                    </div>
+                </article>
+                
+                <!-- 文章4 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <div class="post-date">📅 2026年3月9日 · 阅读时间：7分钟</div>
+                        <a href="article4.html" class="post-title">定价不是随便标的：生鲜定价公式深度解析</a>
+                        <div class="post-meta">
+                            <span>👁️ 阅读：3,125</span>
+                            <span>💬 评论：58</span>
+                            <span>👍 点赞：245</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">深度解析生鲜定价的底层逻辑，学习定价公式：销售价 = 成本价 ÷ (1 - 目标毛利率)。分析不同商品类型的定价策略：常规商品低价引流、特色商品正常价、稀缺商品适当溢价。分享实际定价案例和常见错误...</p>
+                        <div class="tags">
+                            <a href="#" class="tag">#定价策略</a>
+                            <a href="#" class="tag">#定价公式</a>
+                            <a href="#" class="tag">#超市经营</a>
+                            <a href="#" class="tag">#利润管理</a>
+                        </div>
+                        <a href="article4.html" class="read-more" style="margin-top: 1rem; display: inline-block;">阅读全文 →</a>
+                    </div>
+                </article>
+                
+                <!-- 文章5 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <div class="post-date">📅 2026年3月8日 · 阅读时间：5分钟</div>
+                        <a href="article5.html" class="post-title">"9.9元水果盲盒"：社群拉新2000人的活动设计</a>
+                        <div class="post-meta">
+                            <span>👁️ 阅读：4,256</span>
+                            <span>💬 评论：78</span>
+                            <span>👍 点赞：356</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">深度拆解一个成功的生鲜社群活动，学习活动策划全流程。分析"9.9元水果盲盒"活动的四个关键步骤：爆品设计、海报制作、店内引导、社群运营。分享活动数据：单场活动拉新2000+人，转化率提升35%...</p>
+                        <div class="tags">
+                            <a href="#" class="tag">#社群运营</a>
+                            <a href="#" class="tag">#活动策划</a>
+                            <a href="#" class="tag">#私域流量</a>
+                            <a href="#" class="tag">#案例分享</a>
+                        </div>
+                        <a href="article5.html" class="read-more" style="margin-top: 1rem; display: inline-block;">阅读全文 →</a>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <h3>📅 每日学习</h3>
+                <p>每天分析10个抖音生鲜策划视频，持续积累实战经验。关注最新行业动态，拆解优秀策划方案。</p>
+                <a href="daily.html" class="btn" style="margin-top: 1rem; display: block; text-align: center;">查看今日分析</a>
+                
+                <h3 style="margin-top: 2rem;">🏆 热门文章</h3>
+                <ul style="list-style: none;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">定价公式深度解析</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">"9.9元水果盲盒"活动设计</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">黄金时间法则详解</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">抖音创作者类型分析</a>
+                    </li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;">📂 文章分类</h3>
+                <ul style="list-style: none;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">损耗控制策略 (12篇)</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">定价方法 (8篇)</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">引流获客 (15篇)</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">私域建设 (6篇)</a>
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid #EEE;">
+                        <a href="#" style="color: var(--dark-color); text-decoration: none;">抖音策划 (25篇)</a>
+                    </li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;">📱 联系我</h3>
+                <p>有问题直接联系，快速回复。</p>
+                <a href="tel:13419544138" class="btn" style="display:block;margin-top:0.5rem;text-align:center;">拨打 13419544138</a>
+            </div>
+        </div>
+        
+        <!-- 分页 -->
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">下一页 →</a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于博客</h3>
+                    <p>这里是飞狐（10年生鲜策划导师）的个人博客，记录策划心得、展示案例、收藏最新方案，与所有生鲜从业者共同成长。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="index.html" style="color: #AAA;">首页</a></li>
+                        <li><a href="blog.html" style="color: #AAA;">策划心得</a></li>
+                        <li><a href="cases.html" style="color: #AAA;">案例展示</a></li>
+                        <li><a href="collection.html" style="color: #AAA;">方案收藏</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>联系飞狐</h3>
+                    <p>如果你有生鲜策划方面的问题，或者想要交流学习心得，欢迎联系我。</p>
+                    <a href="tel:13419544138" style="display:block;font-weight:700;font-size:1rem;color:inherit;text-decoration:none;margin:6px 0;">📱 13419544138</a>
+                    <img src="wx.jpg" alt="微信二维码" style="width:100px;height:100px;object-fit:contain;margin-top:6px;border-radius:4px;"/><br/>
+                    <small>长按图片识别微信二维码</small>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 飞狐生鲜策划博客 · 所有内容均为原创或授权转载 · 持续更新中</p>
+                <p>🥦 每天进步一点点，成为更好的生鲜策划人</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏活动状态
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 文章点击效果
+            const posts = document.querySelectorAll('.blog-post');
+            posts.forEach(post => {
+                post.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A' && !e.target.classList.contains('read-more')) {
+                        const link = this.querySelector('.post-title');
+                        if (link) {
+                            window.location.href = link.href;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
