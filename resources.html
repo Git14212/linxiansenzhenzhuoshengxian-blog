@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源下载 - 飞狐生鲜策划博客</title>
+    <style>
+        /* 继承基础样式 */
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #FF7F50;
+            --accent-color: #4682B4;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 资源下载样式 */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 资源分类 */
+        .resource-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .category-count {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        /* 资源列表 */
+        .resource-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .resource-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .resource-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .resource-content {
+            flex: 1;
+        }
+        
+        .resource-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .resource-description {
+            color: #555;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .resource-meta {
+            display: flex;
+            gap: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .resource-download {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .resource-download:hover {
+            background-color: #26734d;
+        }
+        
+        /* 免费资源包 */
+        .free-pack {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .pack-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pack-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .pack-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .resource-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .resource-meta {
+                justify-content: center;
+            }
+            
+            .pack-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 工具类 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #26734d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e56b37;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">🥦 飞狐生鲜策划</div>
+            <div class="tagline">10年实战经验 · 专业策划导师 · 每日学习成长</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo" style="color: var(--primary-color); font-size: 1.5rem;">🥦 飞狐策划</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">策划心得</a></li>
+                <li><a href="cases.html">案例展示</a></li>
+                <li><a href="collection.html">方案收藏</a></li>
+                <li><a href="resources.html" class="active">资源下载</a></li>
+                <li><a href="about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <div class="page-header">
+            <h1>📦 资源下载</h1>
+            <p class="page-description">这里提供各种实用的生鲜策划工具、模板和资料包。所有资源都是基于实战经验总结，可以直接下载使用。</p>
+        </div>
+        
+        <!-- 资源分类 -->
+        <div class="resource-categories">
+            <div class="category-card">
+                <div class="category-icon">📝</div>
+                <div class="category-title">文案模板</div>
+                <p>抖音、小红书等平台的策划文案模板</p>
+                <div class="category-count">15个模板</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">📊</div>
+                <div class="category-title">工具表格</div>
+                <p>定价、损耗、库存等管理工具表格</p>
+                <div class="category-count">8个表格</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🎯</div>
+                <div class="category-title">策划方案</div>
+                <p>完整的活动策划和执行方案</p>
+                <div class="category-count">6个方案</div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">📚</div>
+                <div class="category-title">学习资料</div>
+                <p>生鲜策划学习指南和参考书单</p>
+                <div class="category-count">12份资料</div>
+            </div>
+        </div>
+        
+        <!-- 免费资源包 -->
+        <div class="free-pack">
+            <h2 class="pack-title">🎁 免费新手资源包</h2>
+            <p>专为生鲜策划新手准备的入门资源包，包含最实用的工具和模板</p>
+            
+            <div class="pack-items">
+                <div class="pack-item">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📝</div>
+                    <div>抖音文案模板5个</div>
+                </div>
+                <div class="pack-item">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">💰</div>
+                    <div>生鲜定价计算表格</div>
+                </div>
+                <div class="pack-item">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📈</div>
+                    <div>损耗控制记录表</div>
+                </div>
+                <div class="pack-item">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">🎯</div>
+                    <div>社群活动策划模板</div>
+                </div>
+            </div>
+            
+            <a href="downloads/新手资源包.zip" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 3rem;">
+                立即下载免费资源包
+            </a>
+        </div>
+        
+        <!-- 热门资源 -->
+        <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">🔥 热门下载资源</h2>
+        <div class="resource-list">
+            <!-- 资源1 -->
+            <div class="resource-item">
+                <div class="resource-icon">📝</div>
+                <div class="resource-content">
+                    <div class="resource-title">抖音生鲜策划文案模板库</div>
+                    <p class="resource-description">包含15个抖音生鲜策划视频的文案模板，涵盖损耗控制、定价策略、营销引流等主题，可直接修改使用。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：2.3MB</span>
+                        <span>⬇️ 下载次数：1,245</span>
+                        <span>🔄 最后更新：2026年3月10日</span>
+                    </div>
+                </div>
+                <a href="downloads/抖音文案模板库.zip" class="resource-download">下载</a>
+            </div>
+            
+            <!-- 资源2 -->
+            <div class="resource-item">
+                <div class="resource-icon">💰</div>
+                <div class="resource-content">
+                    <div class="resource-title">生鲜定价计算器Excel表格</div>
+                    <p class="resource-description">智能定价计算表格，输入成本价和目标毛利率，自动计算销售价。支持不同商品类型的定价策略设置。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：1.5MB</span>
+                        <span>⬇️ 下载次数：2,568</span>
+                        <span>🔄 最后更新：2026年3月5日</span>
+                    </div>
+                </div>
+                <a href="downloads/定价计算器.xlsx" class="resource-download">下载</a>
+            </div>
+            
+            <!-- 资源3 -->
+            <div class="resource-item">
+                <div class="resource-icon">📉</div>
+                <div class="resource-content">
+                    <div class="resource-title">生鲜损耗控制记录与分析表</div>
+                    <p class="resource-description">完整的损耗记录和分析表格，帮助追踪各类生鲜商品的损耗情况，找出损耗原因，制定控制策略。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：3.1MB</span>
+                        <span>⬇️ 下载次数：1,892</span>
+                        <span>🔄 最后更新：2026年2月28日</span>
+                    </div>
+                </div>
+                <a href="downloads/损耗控制表.xlsx" class="resource-download">下载</a>
+            </div>
+            
+            <!-- 资源4 -->
+            <div class="resource-item">
+                <div class="resource-icon">🎯</div>
+                <div class="resource-content">
+                    <div class="resource-title">"9.9元水果盲盒"活动全案模板</div>
+                    <p class="resource-description">完整的社群活动策划方案，包含活动设计、海报模板、执行步骤、数据追踪等全套文档。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：5.2MB</span>
+                        <span>⬇️ 下载次数：3,456</span>
+                        <span>🔄 最后更新：2026年2月20日</span>
+                    </div>
+                </div>
+                <a href="downloads/水果盲盒活动模板.zip" class="resource-download">下载</a>
+            </div>
+            
+            <!-- 资源5 -->
+            <div class="resource-item">
+                <div class="resource-icon">📚</div>
+                <div class="resource-content">
+                    <div class="resource-title">生鲜策划学习路线图PDF</div>
+                    <p class="resource-description">系统化的生鲜策划学习指南，包含学习路径、推荐资源、实战练习、成长评估等内容。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：4.7MB</span>
+                        <span>⬇️ 下载次数：1,023</span>
+                        <span>🔄 最后更新：2026年2月15日</span>
+                    </div>
+                </div>
+                <a href="downloads/学习路线图.pdf" class="resource-download">下载</a>
+            </div>
+            
+            <!-- 资源6 -->
+            <div class="resource-item">
+                <div class="resource-icon">📱</div>
+                <div class="resource-content">
+                    <div class="resource-title">小红书生鲜笔记创作指南</div>
+                    <p class="resource-description">小红书生鲜内容创作完整指南，包含选题技巧、拍摄方法、文案写作、标签选择等内容。</p>
+                    <div class="resource-meta">
+                        <span>📦 文件大小：2.8MB</span>
+                        <span>⬇️ 下载次数：1,567</span>
+                        <span>🔄 最后更新：2026年2月10日</span>
+                    </div>
+                </div>
+                <a href="downloads/小红书指南.pdf" class="resource-download">下载</a>
+            </div>
+        </div>
+        
+        <!-- 查看更多 -->
+        <div class="text-center">
+            <a href="#" class="btn">加载更多资源 →</a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>资源说明</h3>
+                    <p>所有资源均为原创或授权分享，仅供学习参考使用。商业使用请联系授权。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>资源分类</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#" style="color: #AAA;">文案模板</a></li>
+                        <li><a href="#" style="color: #AAA;">工具表格</a></li>
+                        <li><a href="#" style="color: #AAA;">策划方案</a></li>
+                        <li><a href="#" style="color: #AAA;">学习资料</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>使用帮助</h3>
+                    <p>下载后如遇到问题，或有资源定制需求，欢迎联系咨询。</p>
+                    <a href="tel:13419544138" style="display:block;font-weight:700;font-size:1rem;color:inherit;text-decoration:none;margin:6px 0;">📱 13419544138</a>
+                    <img src="wx.jpg" alt="微信二维码" style="width:100px;height:100px;object-fit:contain;margin-top:6px;border-radius:4px;"/><br/>
+                    <small>长按图片识别微信二维码</small>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 飞狐生鲜策划博客 · 资源持续更新中</p>
+                <p>🥦 用好工具，提升策划效率</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏活动状态
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 下载按钮点击效果
+            const downloadBtns = document.querySelectorAll('.resource-download, .btn-secondary');
+            downloadBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === 'downloads/新手资源包.zip') {
+                        e.preventDefault();
+                        alert('感谢下载新手资源包！文件已开始下载。\n\n包含内容：\n1. 抖音文案模板5个\n2. 生鲜定价计算表格\n3. 损耗控制记录表\n4. 社群活动策划模板');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
