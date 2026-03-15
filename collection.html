@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案收藏 - 飞狐生鲜策划博客</title>
+    <style>
+        /* 继承基础样式 */
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #FF7F50;
+            --accent-color: #4682B4;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3CB371);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 方案收藏样式 */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 平台筛选 */
+        .platform-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .platform-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            color: var(--accent-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .platform-btn:hover,
+        .platform-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* 方案收藏网格 */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .collection-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #EEE;
+        }
+        
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .collection-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #EEE;
+            background: #F9F9F9;
+        }
+        
+        .collection-platform {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: #E8F4FD;
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .collection-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .collection-title:hover {
+            color: var(--accent-color);
+        }
+        
+        .collection-creator {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .collection-content {
+            padding: 1.5rem;
+        }
+        
+        .collection-excerpt {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .collection-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .collection-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .collection-stats {
+            display: flex;
+            gap: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .collection-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .collection-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background-color: #F5F5F5;
+            color: #666;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .collection-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background-color: #F0F8FF;
+            color: var(--accent-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+        }
+        
+        .action-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* 今日更新 */
+        .daily-update {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .update-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .update-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .update-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            background: #F9F9F9;
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 平台统计 */
+        .platform-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .platform-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .platform-name {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .platform-count {
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .update-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .collection-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .collection-actions {
+                flex-direction: column;
+            }
+        }
+        
+        /* 工具类 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #26734d;
+            transform: translateY(-2px);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .badge-new {
+            background-color: #FFE8E8;
+            color: #FF6B6B;
+        }
+        
+        .badge-hot {
+            background-color: #FFF3CD;
+            color: #E0A800;
+        }
+        
+        .badge-popular {
+            background-color: #D4EDDA;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">🥦 飞狐生鲜策划</div>
+            <div class="tagline">10年实战经验 · 专业策划导师 · 每日学习成长</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo" style="color: var(--primary-color); font-size: 1.5rem;">🥦 飞狐策划</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">策划心得</a></li>
+                <li><a href="cases.html">案例展示</a></li>
+                <li><a href="collection.html" class="active">方案收藏</a></li>
+                <li><a href="resources.html">资源下载</a></li>
+                <li><a href="about.html">关于我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <div class="page-header">
+            <h1>💼 方案收藏</h1>
+            <p class="page-description">这里收藏整理了抖音、小红书、公众号等自媒体平台最新、最优质的生鲜策划方案。每日更新，持续追踪行业动态，为你提供源源不断的策划灵感。</p>
+        </div>
+        
+        <!-- 今日更新 -->
+        <div class="daily-update">
+            <div class="update-header">
+                <h2 class="update-title">📅 今日收藏更新</h2>
+                <div class="update-date">2026年3月12日 更新</div>
+            </div>
+            <div class="update-stats">
+                <div class="stat-box">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">新增方案</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">热门平台</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">原创分析</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">累计收藏</div>
+                </div>
+            </div>
+            <p>今天主要关注抖音生鲜策划视频，分析了10个高赞视频的策划策略，包括损耗控制、定价方法、营销引流等方向。</p>
+            <div class="text-center" style="margin-top: 1.5rem;">
+                <a href="daily-collection.html" class="btn">查看今日详细分析 →</a>
+            </div>
+        </div>
+        
+        <!-- 平台筛选 -->
+        <div class="platform-filter">
+            <button class="platform-btn active">
+                <span>📱</span> 全部平台
+            </button>
+            <button class="platform-btn">
+                <span>🎵</span> 抖音
+            </button>
+            <button class="platform-btn">
+                <span>📕</span> 小红书
+            </button>
+            <button class="platform-btn">
+                <span>💬</span> 公众号
+            </button>
+            <button class="platform-btn">
+                <span>📹</span> 视频号
+            </button>
+            <button class="platform-btn">
+                <span>📺</span> B站
+            </button>
+        </div>
+        
+        <!-- 平台统计 -->
+        <div class="platform-stats">
+            <div class="platform-card">
+                <div class="platform-name">🎵 抖音方案</div>
+                <div class="platform-count">15</div>
+                <p>最新短视频策划方案，关注高赞视频策略</p>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">📕 小红书方案</div>
+                <div class="platform-count">6</div>
+                <p>图文笔记策划方法，学习爆款内容创作</p>
+            </div>
+            <div class="platform-card">
+                <div class="platform-name">💬 公众号方案</div>
+                <div class="platform-count">3</div>
+                <p>深度文章策划，学习长内容创作技巧</p>
+            </div>
+        </div>
+        
+        <!-- 方案收藏网格 -->
+        <div class="collection-grid">
+            <!-- 方案1 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">🎵 抖音</span>
+                    <span class="badge badge-hot">热门</span>
+                    <a href="collection1.html" class="collection-title">"不开抖音等于守着金矿不挖矿"：传统生鲜店转型方案</a>
+                    <div class="collection-creator">@雪松（搞流量） · 3月1日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">分析传统生鲜店如何通过抖音营销实现数字化转型，学习抖音内容策划和流量获取的具体方法。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月12日</div>
+                        <div class="collection-stats">
+                            <span>👍 698</span>
+                            <span>💬 42</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#抖音营销</span>
+                        <span class="collection-tag">#数字化转型</span>
+                        <span class="collection-tag">#流量获取</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection1.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">下载文案</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案2 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">🎵 抖音</span>
+                    <span class="badge badge-new">最新</span>
+                    <a href="collection2.html" class="collection-title">生鲜超市"黄金时间法则"：降低50%损耗的完整方案</a>
+                    <div class="collection-creator">@生鲜祥哥 · 1月13日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">完整拆解"黄金时间法则"的三个关键时间点，提供可执行的损耗控制方案，适合各类生鲜门店。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月12日</div>
+                        <div class="collection-stats">
+                            <span>👍 3158</span>
+                            <span>💬 125</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#损耗控制</span>
+                        <span class="collection-tag">#时间管理</span>
+                        <span class="collection-tag">#保鲜技术</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection2.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">方案模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案3 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">📕 小红书</span>
+                    <span class="badge badge-popular">精选</span>
+                    <a href="collection3.html" class="collection-title">水果店爆款笔记创作：从选图到文案的完整指南</a>
+                    <div class="collection-creator">@水果小姐姐 · 2月28日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">学习小红书水果店爆款笔记的创作方法，包括图片拍摄技巧、文案写作、话题标签选择等。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月11日</div>
+                        <div class="collection-stats">
+                            <span>❤️ 2456</span>
+                            <span>💬 89</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#小红书运营</span>
+                        <span class="collection-tag">#内容创作</span>
+                        <span class="collection-tag">#水果店营销</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection3.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">笔记模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案4 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">🎵 抖音</span>
+                    <span class="badge badge-hot">热门</span>
+                    <a href="collection4.html" class="collection-title">"9.9元水果盲盒"：社群拉新2000人的活动全案</a>
+                    <div class="collection-creator">@私域直播房总舵主 · 2025年10月25日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">完整拆解水果盲盒活动的四个步骤：爆品设计、海报制作、店内引导、社群运营，实现单场活动拉新2000+人。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月10日</div>
+                        <div class="collection-stats">
+                            <span>👍 593</span>
+                            <span>💬 36</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#社群运营</span>
+                        <span class="collection-tag">#活动策划</span>
+                        <span class="collection-tag">#私域流量</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection4.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">活动模板</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案5 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">💬 公众号</span>
+                    <a href="collection5.html" class="collection-title">生鲜定价策略深度解析：从成本到利润的完整链条</a>
+                    <div class="collection-creator">@生鲜经营笔记 · 2025年12月15日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">深度解析生鲜定价的底层逻辑，学习定价公式和不同商品类型的定价策略，提升30%利润率。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月9日</div>
+                        <div class="collection-stats">
+                            <span>👁️ 5045</span>
+                            <span>💬 58</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#定价策略</span>
+                        <span class="collection-tag">#利润管理</span>
+                        <span class="collection-tag">#成本控制</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection5.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">下载文章</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案6 -->
+            <div class="collection-card">
+                <div class="collection-header">
+                    <span class="collection-platform">🎵 抖音</span>
+                    <span class="badge badge-new">最新</span>
+                    <a href="collection6.html" class="collection-title">生鲜超市红包模式：创新促销提升45%回头客率</a>
+                    <div class="collection-creator">@段公子 · 1月13日</div>
+                </div>
+                <div class="collection-content">
+                    <p class="collection-excerpt">学习创新的红包促销模式，通过"消费满88元抽红包"活动提升顾客回头率，建立稳定的顾客群体。</p>
+                    <div class="collection-details">
+                        <div class="collection-date">收藏于：3月8日</div>
+                        <div class="collection-stats">
+                            <span>👍 798</span>
+                            <span>💬 42</span>
+                        </div>
+                    </div>
+                    <div class="collection-tags">
+                        <span class="collection-tag">#促销策略</span>
+                        <span class="collection-tag">#顾客忠诚度</span>
+                        <span class="collection-tag">#创新模式</span>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="collection6.html" class="action-btn">查看分析</a>
+                        <a href="#" class="action-btn">方案模板</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 查看更多 -->
+        <div class="text-center">
+            <a href="#" class="btn">加载更多方案 →</a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于收藏</h3>
+                    <p>每日收集整理各大自媒体平台最新生鲜策划方案，进行深度分析和归类整理，为生鲜从业者提供策划灵感。</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>平台来源</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#" style="color: #AAA;">抖音策划方案</a></li>
+                        <li><a href="#" style="color: #AAA;">小红书笔记</a></li>
+                        <li><a href="#" style="color: #AAA;">公众号文章</a></li>
+                        <li><a href="#" style="color: #AAA;">视频号内容</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>订阅更新</h3>
+                    <p>订阅方案收藏更新，每周获取最新生鲜策划方案合集。</p>
+                    <button class="btn" style="margin-top: 1rem;">点击订阅</button>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 飞狐生鲜策划博客 · 方案收藏持续更新中</p>
+                <p>🥦 每天收集好方案，持续提升策划能力</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏活动状态
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // 平台筛选
+            const platformBtns = document.querySelectorAll('.platform-btn');
+            platformBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    platformBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 这里可以添加平台筛选逻辑
+                    const platform = this.querySelector('span').textContent.trim();
+                    console.log('筛选平台：' + platform);
+                });
+            });
+            
+            // 方案卡片点击效果
+            const collectionCards = document.querySelectorAll('.collection-card');
+            collectionCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('action-btn') && e.target.tagName !== 'A') {
+                        const link = this.querySelector('.collection-title');
+                        if (link) {
+                            window.location.href = link.href;
+                        }
+                    }
+                });
+            });
+            
+            // 订阅按钮
+            const subscribeBtn = document.querySelector('.btn[style*="margin-top: 1rem;"]');
+            if (subscribeBtn) {
+                subscribeBtn.addEventListener('click', function() {
+                    alert('订阅成功！每周一将发送最新生鲜策划方案合集到你的邮箱。');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
